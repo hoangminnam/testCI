@@ -1,0 +1,877 @@
+﻿@using System.Globalization
+@model PetStoreProject.ViewModels.HomeViewModel;
+
+@{
+    ViewData["Title"] = "Trang Chủ";
+}
+
+@section HeadOptional {
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+}
+
+<!--Modal Notification of Successful Account Registration Start-->
+<div id="registerModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="icon-box">
+                    <i class="material-icons">&#xE876;</i>
+                </div>
+                <h4 class="modal-title w-100">Thành Công!</h4>
+            </div>
+            <div class="modal-body">
+                <p class="text-center">Tài khoản của bạn đã tạo thành công. Tiếp tục trải nghiệm mua sắm nhé!</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success btn-block" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal Notification of Successful Account Registration End-->
+<!-- Slider Area Start -->
+<div class="slider-area slider_common_style fullscreen default_arrow">
+    <!-- Slider Area Start Here -->
+    <div class="main-slider-active">
+        <!-- Start Single Slide -->
+        <div class="single-slide slider_animate_style-02" style="background:url(/img/slider/full_slider_1.jpg)">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="slider-content">
+                            <h4>#Món ngon cho thú cưng... </h4>
+                            <h1>Khám Phá Thế Giới <span>Thức Ăn</span> Thú Cưng</h1>
+                            <p>Hãy bắt đầu hành trình khám phá thế giới ẩm thực dành riêng cho thú cưng yêu quý của bạn! Tại đây, chúng tôi mang đến bộ sưu tập đa dạng và phong phú với những món ăn ngon, dinh dưỡng và an toàn nhất, được chọn lọc kỹ lưỡng từ những thương hiệu uy tín.</p>
+                            <div class="slide-btn small-btn">
+                                <a href="/product/foods">Khám Phá Ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Single Slide -->
+        <!-- Start Single Slide -->
+        <div class="single-slide slider_animate_style-02" style="background:url(/img/slider/slider_10.jpg)">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="slider-content text-center">
+                            <h4>#Phong Cách Và Tiện Ích... </h4>
+                            <h1>Bộ Sưu Tập Đa Dạng<br><span>Phụ Kiện</span></h1>
+                            <p>Chúng tôi hân hạnh được mang đến những sản phẩm phong phú và chất lượng nhất, từ vòng cổ, dây dắt, đồ chơi, giường ngủ, đến các phụ kiện thời trang và tiện ích.</p>
+                            <div class="slide-btn small-btn">
+                                <a href="/product/accessories">Khám Phá Ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Single Slide -->
+        <!-- Start Single Slide -->
+        <div class="single-slide slider_animate_style-02" style="background:url(/img/slider/full_slider_5.jpg)">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="slider-content">
+                            <h4>#Dịch Vụ Thú Cưng... </h4>
+                            <h1>Cung Cấp Trọn Gói <span>Dịch Vụ</span><br> Spa & Grooming</h1>
+                            <p>Đem đến cho thú cưng của bạn trải nghiệm chăm sóc tuyệt vời với dịch vụ spa và grooming của chúng tôi! Từ việc tắm gội, cắt tỉa lông, cho đến chăm sóc móng và vệ sinh tai, tất cả đều được thực hiện bởi đội ngũ chuyên gia giàu kinh nghiệm và tận tâm.</p>
+                            <div class="slide-btn small-btn">
+                                <a href="/service/list">Khám Phá Ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Single Slide -->
+    </div>
+    <!-- Slider Area End Here -->
+</div>
+<!-- Slider Area End -->
+<!--Banner area Start-->
+<div class="banner-area adp_top adp_bottom">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="single-banner">
+                    <a href="#">
+                        <img src="/img/banner/banner_5.png" alt="Banner Image">
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="single-banner">
+                    <a href="#">
+                        <img src="/img/banner/banner_6.png" alt="Banner Image">
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="single-banner">
+                    <a href="#">
+                        <img src="/img/banner/banner_7.png" alt="Banner Image">
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--Banner area end-->
+<!-- Food Categry Area Start -->
+<div class="food-category-area adp_bottom">
+    <div class="container text-center">
+        <div class="section-title">
+            <span># Phân Loại </span>
+            <h2>Danh Mục Sản Phẩm</h2>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 text-center">
+                <div class="single-food-category">
+                    <a href="/Product/DogFood" class="food-cat-img">
+                        <img src="/img/icons/ctg_2.png" alt="">
+                    </a>
+                    <h4><a href="/Product/DogFood">Thức Ăn Cho Cún</a></h4>
+                    <span>(@Model.NumberOfDogFoods items)</span>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="single-food-category">
+                    <a href="/Product/DogAccessory" class="food-cat-img">
+                        <img src="/img/icons/ctg_7.png" alt="">
+                    </a>
+                    <h4><a href="/Product/DogAccessory">Phụ Kiện Cho Cún</a></h4>
+                    <span>(@Model.NumberOfDogAccessories items)</span>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="single-food-category">
+                    <a href="/Product/CatFood" class="food-cat-img">
+                        <img src="/img/icons/ctg_6.png" alt="">
+                    </a>
+                    <h4><a href="/Product/CatFood">Thức Ăn Cho Mèo</a></h4>
+                    <span>(@Model.NumberOfCatFoods items)</span>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="single-food-category">
+                    <a href="/Product/CatAccessory" class="food-cat-img">
+                        <img src="/img/icons/price_2.png" alt="">
+                    </a>
+                    <h4><a href="/Product/CatAccessory">Phụ Kiện Cho Mèo</a></h4>
+                    <span>(@Model.NumberOfCatAccessories items)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Food Categry Area End -->
+<!-- Foods Product Area Start Here -->
+<div class="featured-product adp_bottom">
+    <div class="container">
+        <!-- Section Title Start Here -->
+        <div class="section-title">
+            <span>#Thức Ăn</span>
+            <h2>Thức Ăn Thú Cưng</h2>
+        </div>
+        <!-- Section Title End Here -->
+        <!-- main-product Start -->
+        <div class="main-product-tab-area mt-50">
+            <!-- Nav tabs Start-->
+            <ul class="nav tabs-area pro-tabs-area center" role="tablist">
+                <li class="nav-item">
+                    <a class="active" data-bs-toggle="tab" href="#foods_dog_tab">Chó</a>
+                </li>
+                <li class="nav-item">
+                    <a data-bs-toggle="tab" href="#foods_cat_tab">Mèo</a>
+                </li>
+            </ul>
+            <!-- Nav tabs End -->
+            <!-- Tab Contetn Start -->
+            <div class="tab-content">
+                <!-- #foods_dog_tab Start Here -->
+                <div id="foods_dog_tab" class="tab-pane fade show active">
+                    <div class="feature-pro-active-4-1 default_arrow small_arrow row">
+                        @foreach (var dogFood in Model.DogFoodsDisplayed)
+                        {
+                            <!-- Single Product Start -->
+                            <div class="col-xl-3 col-lg-4 col-md-6">
+                                <div class="single-template-product">
+                                    <!-- Product Image Start -->
+                                    <div class="pro-img">
+
+                                        <a href="/product/detail/@dogFood.ProductId">
+                                            <img class="primary-img" src="@dogFood.ImageUrl" alt="single-product">
+                                        </a>
+
+                                        <div class="item_quick_link">
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#myModal" title="Xem chi tiết" onclick="quickView(@dogFood.ProductId)"><i class="icofont-search"></i></a>
+                                        </div>
+
+                                        <div class="product-count-wrap">
+                                            @* <div class="product-countdown" data-countdown="2022/06/01"></div> *@
+                                        </div>
+                                    </div>
+                                    <!-- Product Image End -->
+                                    <!-- Product Content Start -->
+                                    <div class="product_content_wrap">
+                                        <div class="product_content">
+                                            <h4><a href="/product/detail/@dogFood.ProductId">@dogFood.ProductName</a></h4>
+
+                                            <div class="grid_price">
+                                                @{
+                                                    var price = @dogFood.Price;
+                                                }
+                                                <span class="regular-price">@price.ToString("#,###", CultureInfo.GetCultureInfo("en-US")) VND</span>
+                                                @* <del class="discount_price">$75.50</del> *@
+                                            </div>
+
+                                        </div>
+                                        <div class="item_add_cart">
+                                            @* <a class="grid_compare" href="compare.html" title="Compare"><i class="icofont-random"></i></a> *@
+                                            <a class="grid_cart details_cart link " href="#" data-bs-toggle="modal" data-bs-target="#myModal" title="Add to Cart" onclick="quickView(@dogFood.ProductId)">Thêm Vào Giỏ Hàng</a>
+                                            <a class="grid_wishlist" title="Wishlist">
+                                                @{
+                                                    bool isFavorite = ((List<int>)ViewData["listPID"]).Contains(dogFood.ProductId);
+                                                }
+
+                                                <i class="icofont-heart-alt @((isFavorite) ? "favorite" : "not-favorite")"
+                                                   data-id="@dogFood.ProductId"
+                                                   style="color: @((isFavorite) ? "red" : "black"); cursor: pointer;"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- Product Content End -->
+                                </div>
+                            </div>
+                            <!-- Single Product End -->
+                        }
+                    </div>
+                </div>
+                <!-- #foods_dog_tab End Here -->
+                <!-- #foods_cat_tab Start Here -->
+                <div id="foods_cat_tab" class="tab-pane fade">
+                    <div class="feature-pro-active-4-1 default_arrow small_arrow row">
+                        @foreach (var catFood in Model.CatFoodsDisplayed)
+                        {
+                            <!-- Single Product Start -->
+                            <div class="col-xl-3 col-lg-4 col-md-6">
+                                <div class="single-template-product">
+                                    <!-- Product Image Start -->
+                                    <div class="pro-img">
+
+                                        <a href="/product/detail/@catFood.ProductId">
+                                            <img class="primary-img" src="@catFood.ImageUrl" alt="single-product">
+                                        </a>
+
+                                        <div class="item_quick_link">
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#myModal" title="Xem chi tiết" onclick="quickView(@catFood.ProductId)"><i class="icofont-search"></i></a>
+                                        </div>
+
+                                        <div class="product-count-wrap">
+                                            @* <div class="product-countdown" data-countdown="2022/06/01"></div> *@
+                                        </div>
+                                    </div>
+                                    <!-- Product Image End -->
+                                    <!-- Product Content Start -->
+                                    <div class="product_content_wrap">
+                                        <div class="product_content">
+                                            <h4><a href="/product/detail/@catFood.ProductId">@catFood.ProductName</a></h4>
+
+                                            <div class="grid_price">
+                                                @{
+                                                    var price = @catFood.Price;
+                                                }
+                                                <span class="regular-price">@price.ToString("#,###", CultureInfo.GetCultureInfo("en-US")) VND</span>
+                                                @* <del class="discount_price">$75.50</del> *@
+                                            </div>
+
+                                        </div>
+                                        <div class="item_add_cart">
+                                            @* <a class="grid_compare" href="compare.html" title="Compare"><i class="icofont-random"></i></a> *@
+                                            <a class="grid_cart details_cart link " href="#" data-bs-toggle="modal" data-bs-target="#myModal" title="Add to Cart" onclick="quickView(@catFood.ProductId)">Thêm Vào Giỏ Hàng</a>
+                                            <a class="grid_wishlist" title="Wishlist">
+                                                @{
+                                                    bool isFavorite = ((List<int>)ViewData["listPID"]).Contains(catFood.ProductId);
+                                                }
+
+                                                <i class="icofont-heart-alt @((isFavorite) ? "favorite" : "not-favorite")"
+                                                   data-id="@catFood.ProductId"
+                                                   style="color: @((isFavorite) ? "red" : "black"); cursor: pointer;"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- Product Content End -->
+                                </div>
+                            </div>
+                            <!-- Single Product End -->
+                        }
+                    </div>
+                </div>
+                <!-- #foods_cat_tab End Here -->
+            </div>
+            <!-- Tab Content End -->
+        </div>
+        <!-- main-product End-->
+    </div>
+</div>
+<!-- Foods Product Area End Here -->
+<!-- Best Pets Food Features Icon Start Here -->
+<div class="main-features best_pet_food ">
+    <div class="container-fluid">
+        <div class="main_feature_wrapper">
+            <div class="single_feature_wrapper">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-12">
+                        <div class="main-features-top text-md-right">
+                            <div class="single-main-features">
+                                <div class="main-feature-content">
+                                    <h4>Dinh Dưỡng</h4>
+                                    <p>Cung cấp dinh dưỡng đầy đủ và cân đối, giúp thú cưng dễ tiêu hóa, tăng cường sức khỏe và năng lượng.</p>
+                                </div>
+                                <div class="main-feature-icon">
+                                    <i class="icofont-test-bottle"></i>
+                                </div>
+                            </div>
+
+                            <div class="single-main-features">
+                                <div class="main-feature-content">
+                                    <h4>Chất Lượng</h4>
+                                    <p>Sản phẩm được chế biến từ nguyên liệu tự nhiên và chất lượng cao, đảm bảo bữa ăn giàu dinh dưỡng cho thú cưng.</p>
+                                </div>
+                                <div class="main-feature-icon">
+                                    <i class="icofont-royal"></i>
+                                </div>
+                            </div>
+
+                            <div class="single-main-features">
+                                <div class="main-feature-content">
+                                    <h4>An Toàn</h4>
+                                    <p>tuân thủ các tiêu chuẩn an toàn và không chứa các chất phụ gia độc hại, mang lại sự an tâm cho khách hàng.</p>
+                                </div>
+                                <div class="main-feature-icon">
+                                    <i class="icofont-safety"></i>
+                                </div>
+                            </div>
+
+                            <div class="single-main-features">
+                                <div class="main-feature-content">
+                                    <h4>Sức khỏe</h4>
+                                    <p>Thành phần tự nhiên và không chứa chất bảo quản, sản phẩm giúp thú cưng luôn khỏe mạnh và hạnh phúc.</p>
+                                </div>
+                                <div class="main-feature-icon">
+                                    <i class="icofont-heart-beat-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-12">
+                        <div class="main-feature-center-img opacityo-img text-md-left text-center">
+                            <img src="/img/banner/best_pet_food_1.png" alt="features-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Best Pets Food Features End Here -->
+<!-- Accessories Product Area Start Here -->
+<div class="featured-product">
+    <div class="container">
+        <!-- Section Title Start Here -->
+        <div class="section-title">
+            <span>#Phụ Kiện</span>
+            <h2>Phụ Kiện Thú Cưng</h2>
+        </div>
+        <!-- Section Title End Here -->
+        <!-- main-product Start -->
+        <div class="main-product-tab-area mt-50">
+            <!-- Nav tabs -->
+            <ul class="nav tabs-area pro-tabs-area center" role="tablist">
+                <li class="nav-item">
+                    <a class="active" data-bs-toggle="tab" href="#accessories_dog_tab">Chó</a>
+                </li>
+                <li class="nav-item">
+                    <a data-bs-toggle="tab" href="#accessories_cat_tab">Mèo</a>
+                </li>
+            </ul>
+            <!-- Nav tabs End -->
+            <!-- Tab Contetn Start -->
+            <div class="tab-content">
+                <!-- #accessories_dog_tab Start Here -->
+                <div id="accessories_dog_tab" class="tab-pane fade show active">
+                    <div class="feature-pro-active-4 default_arrow small_arrow row">
+                        @foreach (var dogAccessory in Model.DogAccessoriesDisplayed)
+                        {
+                            <!-- Single Product Start -->
+                            <div class="col-xl-3 col-lg-4 col-md-6">
+                                <div class="single-template-product">
+                                    <!-- Product Image Start -->
+                                    <div class="pro-img">
+
+                                        <a href="/product/detail/@dogAccessory.ProductId">
+                                            <img class="primary-img" src="@dogAccessory.ImageUrl" alt="single-product">
+                                        </a>
+
+                                        <div class="item_quick_link">
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#myModal" title="Xem chi tiết" onclick="quickView(@dogAccessory.ProductId)"><i class="icofont-search"></i></a>
+                                        </div>
+
+                                        <div class="product-count-wrap">
+                                            @* <div class="product-countdown" data-countdown="2022/06/01"></div> *@
+                                        </div>
+                                    </div>
+                                    <!-- Product Image End -->
+                                    <!-- Product Content Start -->
+                                    <div class="product_content_wrap">
+                                        <div class="product_content">
+                                            <h4><a href="/product/detail/@dogAccessory.ProductId">@dogAccessory.ProductName</a></h4>
+
+                                            <div class="grid_price">
+                                                @{
+                                                    var price = @dogAccessory.Price;
+                                                }
+                                                <span class="regular-price">@price.ToString("#,###", CultureInfo.GetCultureInfo("en-US")) VND</span>
+                                                @* <del class="discount_price">$75.50</del> *@
+                                            </div>
+
+                                        </div>
+                                        <div class="item_add_cart">
+                                            @* <a class="grid_compare" href="compare.html" title="Compare"><i class="icofont-random"></i></a> *@
+                                            <a class="grid_cart details_cart link " href="#" data-bs-toggle="modal" data-bs-target="#myModal" title="Add to Cart" onclick="quickView(@dogAccessory.ProductId)">Thêm Vào Giỏ Hàng</a>
+                                            <a class="grid_wishlist" title="Wishlist">
+                                                @{
+                                                    bool isFavorite = ((List<int>)ViewData["listPID"]).Contains(dogAccessory.ProductId);
+                                                }
+
+                                                <i class="icofont-heart-alt @((isFavorite) ? "favorite" : "not-favorite")"
+                                                   data-id="@dogAccessory.ProductId"
+                                                   style="color: @((isFavorite) ? "red" : "black"); cursor: pointer;"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- Product Content End -->
+                                </div>
+                            </div>
+                            <!-- Single Product End -->
+                        }
+                    </div>
+                </div>
+                <!-- #accessories_dog_tab End Here -->
+                <!-- #accessories_cat_tab Start Here -->
+                <div id="accessories_cat_tab" class="tab-pane fade">
+                    <div class="feature-pro-active-4 default_arrow small_arrow row">
+                        @foreach (var catAccessory in Model.CatAccessoriesDisplayed)
+                        {
+                            <!-- Single Product Start -->
+                            <div class="col-xl-3 col-lg-4 col-md-6">
+                                <div class="single-template-product">
+                                    <!-- Product Image Start -->
+                                    <div class="pro-img">
+
+                                        <a href="/product/detail/@catAccessory.ProductId">
+                                            <img class="primary-img" src="@catAccessory.ImageUrl" alt="single-product">
+                                        </a>
+
+                                        <div class="item_quick_link">
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#myModal" title="Xem chi tiết" onclick="quickView(@catAccessory.ProductId)"><i class="icofont-search"></i></a>
+                                        </div>
+
+                                        <div class="product-count-wrap">
+                                            @* <div class="product-countdown" data-countdown="2022/06/01"></div> *@
+                                        </div>
+                                    </div>
+                                    <!-- Product Image End -->
+                                    <!-- Product Content Start -->
+                                    <div class="product_content_wrap">
+                                        <div class="product_content">
+                                            <h4><a href="/product/detail/@catAccessory.ProductId">@catAccessory.ProductName</a></h4>
+
+                                            <div class="grid_price">
+                                                @{
+                                                    var price = @catAccessory.Price;
+                                                }
+                                                <span class="regular-price">@price.ToString("#,###", CultureInfo.GetCultureInfo("en-US")) VND</span>
+                                                @* <del class="discount_price">$75.50</del> *@
+                                            </div>
+
+                                        </div>
+                                        <div class="item_add_cart">
+                                            @* <a class="grid_compare" href="compare.html" title="Compare"><i class="icofont-random"></i></a> *@
+                                            <a class="grid_cart details_cart link " href="#" data-bs-toggle="modal" data-bs-target="#myModal" title="Add to Cart" onclick="quickView(@catAccessory.ProductId)">Thêm Vào Giỏ Hàng</a>
+                                            <a class="grid_wishlist" title="Wishlist">
+                                                @{
+                                                    bool isFavorite = ((List<int>)ViewData["listPID"]).Contains(catAccessory.ProductId);
+                                                }
+
+                                                <i class="icofont-heart-alt @((isFavorite) ? "favorite" : "not-favorite")"
+                                                   data-id="@catAccessory.ProductId"
+                                                   style="color: @((isFavorite) ? "red" : "black"); cursor: pointer;"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- Product Content End -->
+                                </div>
+                            </div>
+                            <!-- Single Product End -->
+                        }
+                    </div>
+                </div>
+                <!-- #accessories_cat_tab End Here -->
+            </div>
+            <!-- Tab Content End -->
+        </div>
+        <!-- main-product End-->
+    </div>
+</div>
+<!-- Accessories Product Area End Here -->
+<!-- Best Pets Service Start Here -->
+<div class="best_feature_area care_feature_area adp_top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-6 col-lg-5 col-md-12 col-12">
+                <div class="main-camera opacity-img">
+                    <img src="/img/banner/best_feature_2.png" alt="features-img">
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-7 col-md-12 col-12">
+                <div class="best_feature_content">
+                    <a href="/service/list"><h3>Spa & Grooming Cho Thú Cưng</h3></a>
+                    <p>Chào mừng bạn đến với dịch vụ spa và grooming chuyên nghiệp dành cho thú cưng! Chúng tôi cung cấp các dịch vụ chăm sóc toàn diện, từ tắm rửa, cắt tỉa lông đến massage thư giãn, đảm bảo thú cưng của bạn luôn sạch sẽ và khỏe mạnh. Với đội ngũ nhân viên giàu kinh nghiệm và trang thiết bị hiện đại, chúng tôi cam kết mang lại trải nghiệm tuyệt vời nhất cho thú cưng của bạn. Hãy đặt lịch ngay hôm nay!</p>
+                    <!-- Product Features Start Here -->
+                    <div class="care_feature_wrapper">
+                        <!-- Single Features Start Here -->
+                        <div class="single_care_feature">
+                            <div class="main-feature-img">
+                                <img src="/img/icons/13.png" alt="feature-icon">
+                            </div>
+                            <div class="main-feature-content">
+                                <h4>Trang Thiết Bị Hiện Đại</h4>
+                                <p>Sử dụng thiết bị tiên tiến, đảm bảo an toàn và thoải mái cho thú cưng của bạn.</p>
+                            </div>
+                        </div>
+                        <!-- Single Features End Here -->
+                        <!-- Single Features Start Here -->
+                        <div class="single_care_feature">
+                            <div class="main-feature-img">
+                                <img src="/img/icons/14.png" alt="feature-icon">
+                            </div>
+                            <div class="main-feature-content">
+                                <h4>Đội Ngũ Chuyên Nghiệp</h4>
+                                <p>Đội ngũ nhân viên giàu kinh nghiệm, tận tâm và hiểu biết về chăm sóc thú cưng.</p>
+                            </div>
+                        </div>
+                        <!-- Single Features End Here -->
+                        <!-- Single Features Start Here -->
+                        <div class="single_care_feature">
+                            <div class="main-feature-img">
+                                <img src="/img/icons/15.png" alt="feature-icon">
+                            </div>
+                            <div class="main-feature-content">
+                                <h4>Chăm Sóc Tận Tình</h4>
+                                <p>Chăm sóc thú cưng với tình yêu và sự ân cần, mang lại trải nghiệm tốt nhất.</p>
+                            </div>
+                        </div>
+                        <!-- Single Features End Here -->
+                        <!-- Single Features Start Here -->
+                        <div class="single_care_feature">
+                            <div class="main-feature-img">
+                                <img src="/img/icons/care_04.png" alt="feature-icon">
+                            </div>
+                            <div class="main-feature-content">
+                                <h4>Đặt Lịch Online</h4>
+                                <p>Dễ dàng đặt lịch online, chọn thời gian phù hợp và nhận xác nhận ngay lập tức.</p>
+                            </div>
+                        </div>
+                        <!-- Single Features End Here -->
+                    </div>
+                    <!-- Product Features End Here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Best Pets Service End Here -->
+<!-- Service pricing table area start -->
+<div class="pricing-table-area adp_top adp_bottom">
+    <div class="container">
+        <!-- Section Title Start Here -->
+        <div class="section-title">
+            <span>#Dịch Vụ</span>
+            <h2>Dịch Vụ Thú Cưng</h2>
+        </div>
+        <!-- Section Title End Here -->
+        <!-- main-service Start -->
+        <div class="service-pro-active default_arrow small_arrow row">
+            @foreach (var service in Model.ServicesDisplayed)
+            {
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="single-pricing-table text-center">
+                        <div class="price-icon">
+                            <img class="rounded-circle" src="@service.ImageUrl" alt="pric icon">
+                        </div>
+                        <h4 class="d-flex align-items-center justify-content-center">@service.Name</h4>
+                        <div class="price-tag">
+                            <span>@service.Price.ToString("#,###") VND</span>
+                        </div>
+                        <div class="adv-area">
+                            @Html.Raw(service.SupDescription)
+                        </div>
+                        <div class="small-btn">
+                            <a href="/service/detail/@service.ServiceId" tabindex="0">Xem Chi Tiết</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <!-- main-service End-->
+</div>
+<!-- Service pricing table area end -->
+<!-- Latest Blog Area Start -->
+<div class="latest-blog-area adp_bottom">
+    <div class="container">
+        <!-- Section Title Start Here -->
+        <div class="section-title">
+            <span># Blogs </span>
+            <h2>Blog Mới Nhất</h2>
+        </div>
+        <!-- Section Title End Here -->
+        <!-- Section Title End -->
+        <div class="row">
+            <!-- Single Blog Start -->
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="single-animart-blog">
+                    <div class="blog-img">
+                        <a href="blog-details.html">
+                            <img src="/img/blog/blog_1.jpg" alt="blog-img">
+                        </a>
+                        <div class="publish-meta-date">
+                            <span>20 December, 2022</span>
+                        </div>
+                    </div>
+                    <div class="grid-blog-content">
+                        <h4>
+                            <a href="blog-details.html">Blog grid style  item title here</a>
+                        </h4>
+
+                        <ul class="blog-post-meta">
+                            <li>By: <a href="#">animart</a></li>
+                            <li><a href="#"> 12 comments </a></li>
+                        </ul>
+
+                        <p>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                            been the industrys pets_tab dummy text ever since ...
+                        </p>
+                        <div class="blog-btn">
+                            <a href="blog-details.html">Continue Reading . . .</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Single Blog End -->
+            <!-- Single Blog Start -->
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="single-animart-blog">
+                    <div class="blog-img">
+                        <a href="blog-details.html">
+                            <img src="/img/blog/blog_2.jpg" alt="blog-img">
+                        </a>
+                        <div class="publish-meta-date">
+                            <span>20 December, 2022</span>
+                        </div>
+                    </div>
+                    <div class="grid-blog-content">
+                        <h4>
+                            <a href="blog-details.html">Blog grid style  item title here</a>
+                        </h4>
+
+                        <ul class="blog-post-meta">
+                            <li>By: <a href="#">animart</a></li>
+                            <li><a href="#"> 12 comments </a></li>
+                        </ul>
+
+                        <p>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                            been the industrys pets_tab dummy text ever since ...
+                        </p>
+                        <div class="blog-btn">
+                            <a href="blog-details.html">Continue Reading . . .</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Single Blog End -->
+            <!-- Single Blog Start -->
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="single-animart-blog">
+                    <div class="blog-img">
+                        <a href="blog-details.html">
+                            <img src="/img/blog/blog_3.jpg" alt="blog-img">
+                        </a>
+                        <div class="publish-meta-date">
+                            <span>20 December, 2022</span>
+                        </div>
+                    </div>
+                    <div class="grid-blog-content">
+                        <h4>
+                            <a href="blog-details.html">Blog grid style  item title here</a>
+                        </h4>
+
+                        <ul class="blog-post-meta">
+                            <li>By: <a href="#">animart</a></li>
+                            <li><a href="#"> 12 comments </a></li>
+                        </ul>
+
+                        <p>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                            been the industrys pets_tab dummy text ever since ...
+                        </p>
+                        <div class="blog-btn">
+                            <a href="blog-details.html">Continue Reading . . .</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Single Blog End -->
+
+        </div>
+    </div>
+</div>
+<!-- Latest Blog Area End -->
+<!-- Brand Area Start Here -->
+<div class="brand-area adp_top adp_bottom">
+    <div class="container">
+        <!-- Brand Logo Active Start Here -->
+        <div class="brand-logo-active">
+            <div class="single-brand">
+                <a href="#"><img src="/img/brand/b1.png" alt="brand-image"></a>
+            </div>
+            <div class="single-brand">
+                <a href="#"><img src="/img/brand/b2.png" alt="brand-image"></a>
+            </div>
+            <div class="single-brand">
+                <a href="#"><img src="/img/brand/b3.png" alt="brand-image"></a>
+            </div>
+            <div class="single-brand">
+                <a href="#"><img src="/img/brand/b4.png" alt="brand-image"></a>
+            </div>
+            <div class="single-brand">
+                <a href="#"><img src="/img/brand/b5.png" alt="brand-image"></a>
+            </div>
+            <div class="single-brand">
+                <a href="#"><img src="/img/brand/b1.png" alt="brand-image"></a>
+            </div>
+            <div class="single-brand">
+                <a href="#"><img src="/img/brand/b2.png" alt="brand-image"></a>
+            </div>
+        </div>
+        <!-- Brand Logo Active End Here -->
+    </div>
+</div>
+<!-- Brand Area End Here -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.icofont-heart-alt').on('click', function () {
+            console.log('Heart clicked');
+
+            var $this = $(this);
+            var productId = $this.data('id');
+            var isFavorite = $this.hasClass('favorite');
+
+            console.log('Product ID:', productId);
+            console.log('Is Favorite:', isFavorite);
+
+            // Toggle the favorite class
+            $this.toggleClass('favorite not-favorite');
+
+            if (isFavorite) {
+                $this.css('color', 'black');
+            } else {
+                $this.css('color', 'red');
+            }
+
+            var token = $('input[name="__RequestVerificationToken"]').val();
+
+            // Send AJAX request to update the favorite status
+            $.ajax({
+                url: '@Url.Action("ToggleFavorite", "Product")',
+                type: 'POST',
+                headers: {
+                    'RequestVerificationToken': token
+                },
+                data: { productId: productId },
+                success: function (response) {
+                    console.log('AJAX success:', response);
+                },
+                error: function (xhr, status, error) {
+                    console.error('AJAX error:', error);
+
+                    var errorMessage;
+
+                    // Kiểm tra mã trạng thái lỗi và đặt thông báo lỗi tương ứng
+                    switch (xhr.status) {
+                        case 400:
+                            alert('Yêu cầu không hợp lệ. Vui lòng kiểm tra lại thông tin.');
+                            break;
+                        case 401:
+                            alert('Bạn chưa đăng nhập. Vui lòng đăng nhập để thực hiện thao tác này.');
+                            break;
+                        case 403:
+                            alert('Bạn không có quyền thực hiện thao tác này.');
+                            break;
+                        case 404:
+                            alert('Không tìm thấy sản phẩm. Vui lòng thử lại.');
+                            break;
+                        case 500:
+                            alert('Lỗi máy chủ. Vui lòng thử lại sau.');
+                            break;
+                        default:
+                            alert('Đã xảy ra lỗi không xác định. Vui lòng thử lại.');
+                    }
+
+
+                    // Hiển thị thông báo lỗi
+                    $('#error-message').text(errorMessage).show();
+
+                    // Rollback the color change if there is an error
+                    $this.toggleClass('favorite not-favorite');
+                    if (isFavorite) {
+                        $this.css('color', 'red');
+                    } else {
+                        $this.css('color', 'black');
+                    }
+                }
+            });
+        });
+    });
+
+</script>
+
+@Html.Partial("_QuickView")
+<!-- Brand Area End Here -->
+@section ScriptOptional {
+    @if (ViewBag.Success != null)
+    {
+        <script>
+            $(document).ready(function () {
+                $("#registerModal").modal("show");
+
+                $("#registerModal").modal({ backdrop: true });
+            });
+        </script>
+    }
+}
+

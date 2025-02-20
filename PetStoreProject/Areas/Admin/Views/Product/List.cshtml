@@ -1,0 +1,224 @@
+﻿@using PetStoreProject.Areas.Admin.ViewModels
+@*
+   
+*@
+@{
+    ViewData["title"] = "Danh sách sản phẩm";
+}
+@section HeadOptional {
+    <style>
+        .choose {
+            font-weight: bold !important;
+        }
+        .productCateItem {
+            width: 150px;
+        }
+        .sort-arrows {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sort-arrow {
+            font-size: 10px;
+            line-height: 10px;
+            cursor: pointer;
+            user-select: none;
+        }
+    </style>
+}
+<div class="main-content-inner">
+    <!-- main-content-wrap -->
+    <div class="main-content-wrap">
+        <div class="flex items-center flex-wrap justify-between gap20 mb-27">
+            <h3>Danh sách sản phẩm</h3>
+            <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
+                <li>
+                    <a href="index.html"><div class="text-tiny">Dashboard</div></a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <a href="#"><div class="text-tiny">Sản phẩm</div></a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <div class="text-tiny">Danh sách sản phẩm</div>
+                </li>
+            </ul>
+        </div>
+        <!-- product-list -->
+        <div class="wg-box">
+            <div class="title-box">
+                <i class="icon-coffee"></i>
+                <div class="body-text">Tip: Mỗi sản phẩm được cung cấp với một ID duy nhất, bạn có thể dựa vào đó để tìm chính xác sản phẩm bạn cần (#ID)</div>
+            </div>
+            <div class="col-xl-12 col-lg-12 d-none d-lg-block">
+                <nav>
+                    <ul class="header-menu-list text-center" style="display: flex; justify-content: space-between; align-items:center; height: 50px">
+                        <li class="active">
+                            <div class="show flex" style="align-items: center">
+                                <div class="text-tiny" style="padding-left: 12px">HIển thị </div>
+                                <div class="select" id="pageSize" style="margin: 5px; padding: 0">
+                                </div>
+                                <div class="text-tiny"> sản phẩm</div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="form-search" id="form-search">
+                            </span>
+                        </li>
+                        <li style="padding: 10px">
+                            <a class="drop-icon" href="#">Danh Mục</a>
+                            <!-- Home Version Dropdown Start -->
+                            <ul class="common_ddown" id="category-list" style="width: 190px">
+                                
+                            </ul>
+                            <!-- Home Version Dropdown End -->
+                        </li>
+                        <li style="padding: 10px">
+                            <a class="drop-icon" href="#">Dịch Mục Sản Phẩm</a>
+                            <!-- Home Version Dropdown Start -->
+                            <ul class="common_ddown" id="product-category-list" style="max-height:235px; overflow: auto; width:290px">
+                                
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="tf-button style-1 w208" href="Create"><i class="icon-plus"></i>Thêm mới</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div id="no-option">Không sản phẩm nào có các lựa chọn phù hợp</div>
+            
+            <div class="wg-table table-product-list" id="table-product">
+                <ul class="header-menu-list table-title flex gap20 mb-14" style="height: 50px; align-items:center">
+                    <li>
+                        <div class="body-title">Sản phẩm</div>
+                    </li>
+                    <li>
+                        <div class="body-title">ID</div>
+                    </li>
+                    <li style="padding: 10px">
+                        <a class="drop-icon body-title" href="#">Giá</a>
+                        <ul class="common_ddown" id="sort-price" style="width:190px">
+
+                        </ul>
+                    </li>
+                    <li style="padding: 10px">
+                        <a class="drop-icon body-title" href="#">Đã bán</a>
+                        <ul class="common_ddown" id="sort-sold-quantity" style="width:250px">
+                        </ul>
+                    </li>
+                    <li style="padding: 10px">
+                        <a class="drop-icon" href="#" style="width:100%">Trong kho</a>
+                        <ul class="common_ddown" id="is-in-stock" style="width: 130px">
+                        </ul>
+                    </li>
+                    <li style="padding: 10px">
+                        <a class="drop-icon" href="#" style="width:100%">Tình trạng</a>
+                        <ul class="common_ddown" id="is-delete" style="width: 130px">
+
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="body-title"></div>
+                    </li>
+                </ul>
+                <div style="max-height:745px; overflow-y:auto">
+                    <ul class="flex flex-column" id="product-list">
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="flex items-center justify-between flex-wrap gap10">
+                <div>
+                    <button onclick="fetchProducts(10,1)" style="padding: 10px; border-radius: 5px">Xóa bộ lọc</button>
+                </div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination" id="pageNumber">
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- /product-list -->
+    </div>
+    <!-- /main-content-wrap -->
+</div>
+@section ScriptOptional{
+    <script>
+        ChoosePageSize(10, 1)
+        function ChoosePage(pageNumber, pageSize, categoryId, productCateId, key, sortPrice, sortSoldQuantity, isInStock, isDelete) {
+            fetchProducts(pageSize, pageNumber, categoryId, productCateId, key, sortPrice, sortSoldQuantity, isInStock, isDelete);
+        }
+
+        function ChooseCategory(categoryId, pageSize, pageNumber, productCateId, key, sortPrice, sortSoldQuantity, isInStock, isDelete) {
+            fetchProducts(pageSize, pageNumber, categoryId, productCateId, key, sortPrice, sortSoldQuantity, isInStock, isDelete);
+        }
+
+        function ChoosePageSize(pageSize, pageNumber, categoryId, productCateId, key, sortPrice, sortSoldQuantity, isInStock, isDelete) {
+            let x = $('#size').val();
+            fetchProducts(x, pageNumber, categoryId, productCateId, key, sortPrice, sortSoldQuantity, isInStock, isDelete);
+        }
+        function chooseProductCategory(productCateId, pageSize, pageNumber, categoryId, key, sortPrice, sortSoldQuantity, isInStock, isDelete) {
+            fetchProducts(pageSize, pageNumber, categoryId, productCateId, key, sortPrice, sortSoldQuantity, isInStock, isDelete);
+        }
+        function chooseKey(pageSize, pageNumber, categoryId, productCateId, sortPrice, sortSoldQuantity, isInStock, isDelete) {
+            let key = $('#search-input').val();
+            fetchProducts(pageSize, pageNumber, categoryId, productCateId, key, sortPrice, sortSoldQuantity, isInStock, isDelete);
+        }
+        function ChooseSortPrice(pageSize, pageNumber, categoryId, productCateId, key,
+            sortPrice, sortSoldQuantity, isInStock, isDelete) {
+            fetchProducts(pageSize, pageNumber, categoryId, productCateId, key, sortPrice, sortSoldQuantity, isInStock, isDelete);
+        }
+        function ChooseSortSoldQuantity(pageSize, pageNumber, categoryId, productCateId, key,
+            sortPrice, sortSoldQuantity, isInStock, isDelete){
+            fetchProducts(pageSize, pageNumber, categoryId, productCateId, key, sortPrice, sortSoldQuantity, isInStock, isDelete);
+        }
+
+        function ChooseIsInStock(pageSize, pageNumber, categoryId, productCateId, key,
+            sortPrice, sortSoldQuantity, isInStock, isDelete){
+            fetchProducts(pageSize, pageNumber, categoryId, productCateId, key, sortPrice, sortSoldQuantity, isInStock, isDelete);
+        }
+
+        function ChooseIsDelete(pageSize, pageNumber, categoryId, productCateId, key,
+            sortPrice, sortSoldQuantity, isInStock, isDelete){
+            fetchProducts(pageSize, pageNumber, categoryId, productCateId, key, sortPrice, sortSoldQuantity, isInStock, isDelete);
+        }
+
+        function quickViewForAdmin(productId) {
+            quickView(productId)
+            const quickAddToCartBtn = document.getElementById('quick_add_to_cart');
+            quickAddToCartBtn.classList.remove('out-of-stock');
+            quickAddToCartBtn.innerText = 'Chỉnh sửa';
+            console.log(123)
+        }
+
+        function deleteProduct(productId, productName) {
+            if (confirm(`Bạn có chắc chắn muốn ngừng bán '${productName}' không???`)){
+                $.ajax({
+                    url: `/Admin/Product/Delete`,
+                    data: { productId: productId },
+                    method: 'POST',
+                    success: function (res) {
+                        var product = $('.product-' + productId);
+                        product.find('.isDelete').text('Ngừng bán')
+                        product.find('.isDelete').addClass('block-not-available')
+                        product.find('.isDelete').removeClass('block-available')
+                    }
+                })
+            }
+            
+        }
+
+    </script>
+}

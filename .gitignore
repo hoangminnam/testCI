@@ -1,0 +1,9 @@
+ # Bỏ qua thư mục chứa cấu hình bí mật
+appsettings.json
+appsettings.Development.json
+
+# Bỏ qua thư mục build và thư mục tạm thời của Visual Studio
+bin/
+obj/
+.vs/
+
