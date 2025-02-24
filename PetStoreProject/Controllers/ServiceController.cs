@@ -82,7 +82,7 @@ namespace PetStoreProject.Controllers
             if (ModelState.IsValid)
             {
                 bool isPhoneValid = PhoneNumber.isValid(bookServiceInfo.Phone);
-                if (isPhoneValid == false)
+                if (!isPhoneValid)
                 {
                     ViewData["WorkingTime"] = _service.GetWorkingTime(bookServiceInfo.ServiceId);
                     ViewBag.PhoneMess = "Số điện thoại không hợp lệ. Vui lòng nhập lại.";

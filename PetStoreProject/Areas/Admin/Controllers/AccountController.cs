@@ -27,6 +27,10 @@ namespace PetStoreProject.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult List(int? pageIndex, int? pageSize, string? searchName, string? sortName, string? selectStatus)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var pageIndexLocal = pageIndex ?? 1;
 
             var pageSizeLocal = pageSize ?? 10;
