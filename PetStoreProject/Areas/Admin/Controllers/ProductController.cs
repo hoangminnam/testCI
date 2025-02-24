@@ -8,6 +8,7 @@ using PetStoreProject.Repositories.Category;
 using PetStoreProject.Repositories.Product;
 using PetStoreProject.Repositories.ProductCategory;
 using PetStoreProject.Repositories.Size;
+using System.Linq;
 
 namespace PetStoreProject.Areas.Admin.Controllers
 {
@@ -120,15 +121,9 @@ namespace PetStoreProject.Areas.Admin.Controllers
             if (product != null && product.ProductOptions != null && product.ProductOptions[0].Attribute.AttributeId != 1)
             {
                 var uniqueAttributes = new HashSet<int>();
-                var attributes = new List<Models.Attribute>();
-
-                foreach (var option in product.ProductOptions)
-                {
-                    if (option.Attribute != null && uniqueAttributes.Add(option.Attribute.AttributeId))
-                    {
-                        attributes.Add(option.Attribute);
-                    }
-                }
+                var attributes = (from option in product.ProductOptions
+                                  where option.Attribute != null && uniqueAttributes.Add(option.Attribute.AttributeId)
+                                  select option.Attribute).ToList();
                 ViewData["attributes"] = attributes;
             }
             ViewData["product"] = product;
@@ -145,19 +140,14 @@ namespace PetStoreProject.Areas.Admin.Controllers
             var sizes = _size.GetSizes();
             var brands = _brand.GetBrands();
             HashSet<int> uniqueImages = new HashSet<int>();
-            List<Models.Image> images = new List<Models.Image>();
-            foreach (var option in product.ProductOptions)
-            {
-                if (option.Image != null && uniqueImages.Add(option.Image.ImageId))
-                {
-                    images.Add(new Models.Image
-                    {
-                        ImageId = option.Image.ImageId,
-                        /*ImageUrl = await _cloudinary.GetBase64Image(option.Image.ImageUrl.Trim())*/
-                        ImageUrl = option.Image.ImageUrl.Trim()
-                    });
-                }
-            }
+            List<Models.Image> images = (from option in product.ProductOptions
+                                         where option.Image != null && uniqueImages.Add(option.Image.ImageId)
+                                         select new Models.Image
+                                         {
+                                             ImageId = option.Image.ImageId,
+                                             /*ImageUrl = await _cloudinary.GetBase64Image(option.Image.ImageUrl.Trim())*/
+                                             ImageUrl = option.Image.ImageUrl.Trim()
+                                         }).ToList();
             ViewData["images"] = images;
             ViewData["categories"] = categories;
             ViewData["productCategories"] = productCategories;

@@ -152,7 +152,7 @@ namespace PetStoreProject.Controllers
                     break;
             }
             var productDetails = _product.GetProductDetailDoGet(categoryIds, productCateId ?? 0); // thay doi
-            var totalItems = productDetails.Count();
+            var totalItems = productDetails.Count;
             var pageIndex = page ?? 1;
             var _pageSize = pageSize ?? 21;
             var numberPage = Math.Ceiling((float)totalItems / _pageSize);
@@ -286,7 +286,7 @@ namespace PetStoreProject.Controllers
             }
             var _pageSize = pageSize ?? 21;
             var pageIndex = page ?? 1;
-            var totalItems = productDetails.Count();
+            var totalItems = productDetails.Count;
             var numberPage = Math.Ceiling((float)totalItems / _pageSize);
             var productDetail = productDetails.Skip((pageIndex - 1) * _pageSize).Take(_pageSize).ToList();
             List<int> listPID = _product.GetProductIDInWishList(GetCustomerId());

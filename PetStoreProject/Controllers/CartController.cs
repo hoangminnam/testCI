@@ -64,6 +64,10 @@ namespace PetStoreProject.CartController
             if (userRole == "Customer")
             {
                 var customerEmail = HttpContext.Session.GetString("userEmail");
+                if(customerEmail == null)
+                {
+                    return Json(new { message = "Tài khoản của bạn không thể sử dụng chức năng này!!!" });
+                }
                 var customerID = _customer.GetCustomerId(customerEmail);
                 return AddCartItemOfCustomer(productOptionId, quantity, customerID);
             }

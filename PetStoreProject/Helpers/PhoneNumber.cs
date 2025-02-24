@@ -2,9 +2,9 @@
 
 namespace PetStoreProject.Helpers
 {
-    public class PhoneNumber
+    public static class PhoneNumber
     {
-        public static bool isValid(string phoneNumber)
+        public static bool isValid(string? phoneNumber)
         {
             var phoneUtil = PhoneNumberUtil.GetInstance();
             try
