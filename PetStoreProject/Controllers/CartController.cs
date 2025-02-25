@@ -222,7 +222,7 @@ namespace PetStoreProject.CartController
                         if (Request.Cookies.TryGetValue($"Item_{itemId}", out string cookieItem))
                         {
                             var cartItem = JsonConvert.DeserializeObject<CartItemViewModel>(cookieItem);
-                            if (!(cartItem.Quantity + quantity > 10))
+                            if ((cartItem.Quantity + quantity) <= 10)
                             {
                                 cartItem.Quantity += quantity;
                                 Response.Cookies.Append($"Item_{itemId}", JsonConvert.SerializeObject(cartItem), cookieOptions);
