@@ -37,7 +37,7 @@ namespace PetStoreProject.Repositories.Category
                 {
                     Id = category.CategoryId,
                     Name = category.Name,
-                    totalCategories = GetListCategory(category.CategoryId).Count()
+                    totalCategories = GetListCategory(category.CategoryId).Count
                 });
             }
             return categoryViewModels;

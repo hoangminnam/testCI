@@ -2,8 +2,8 @@
 {
 	public class PaginatedList<T> : List<T>
 	{
-		public int pageIndex;
-		public int totalPage;
+		private int pageIndex;
+		private int totalPage;
 
 		public bool hasPreviousPage => pageIndex > 1;
 		public bool hasNextPage => pageIndex < totalPage;
