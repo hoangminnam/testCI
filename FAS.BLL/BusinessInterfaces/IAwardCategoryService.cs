@@ -11,7 +11,7 @@ namespace FAS.BLL.BusinessInterfaces
     public interface IAwardCategoryService
     {
         Task<List<AwardCategoryDto>> GetAwardCategoryPage();
-        Task<List<AwardCategoryDto>> GetAwardCategoryFilter(string search);
+        Task<List<AwardCategoryDto>> GetAwardCategoryFilter(AwardCategoryDto filter);
         Task<AwardCategory> SetAwardCategoryInfo(AwardCategoryDto awardCategory);
         Task<AwardCategory?> UpdateAwardCategoryInfo(AwardCategoryDto awardCategory);
         Task<string> DeleteAwardCategory(Guid awardCategoryId);    

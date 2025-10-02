@@ -26,23 +26,33 @@ namespace FAS.DAL.Repositories
                 .ToListAsync();
             return result;
         }
-
-        public async Task<List<AwardCategoryDto>> GetAwardCategoryFilter(string search)
+        public async Task<List<AwardCategoryDto>> GetAwardCategoryFilter(AwardCategoryDto filter)
         {
             var query = _context.AwardCategories.AsQueryable();
-            if (!string.IsNullOrEmpty(search))
+
+            if (!string.IsNullOrWhiteSpace(filter.Name))
             {
-                query = query.Where(ac => ac.Name.Contains(search) || ac.Description.Contains(search));
+                query = query.Where(ac =>
+                    ac.Name.Contains(filter.Name) ||
+                    ac.Description.Contains(filter.Description));
             }
+
+            if (filter.ParentCategory.HasValue)
+            {
+                query = query.Where(ac => ac.ParentCategory == filter.ParentCategory.Value);
+            }
+
             var result = await query
                 .Select(aw => new AwardCategoryDto
                 {
                     Id = aw.Id,
                     Name = aw.Name,
                     Description = aw.Description,
-                    Order = aw.Order
+                    Order = aw.Order,
+                    ParentCategory = aw.ParentCategory
                 })
                 .ToListAsync();
+
             return result;
         }
         public async Task<AwardCategory> SetAwardCategoryInfo(AwardCategoryDto awardCategory)
@@ -87,7 +97,5 @@ namespace FAS.DAL.Repositories
 
             return "Xoá thành công!";
         }
-
-
     }
 }

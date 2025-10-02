@@ -19,7 +19,7 @@ namespace FAS.API.Controllers
             _service = service;
         }
         [HttpGet]
-        public async Task<IActionResult> GetAwardCategoryPage()
+        public async Task<IActionResult> GetAwardCategoryAll()
         {
             try
             {
@@ -54,11 +54,11 @@ namespace FAS.API.Controllers
             }
         }
         [HttpGet]
-        public async Task<IActionResult> GetAwardCategoryFilter(string search)
+        public async Task<IActionResult> GetAwardCategoryFilter([FromQuery] AwardCategoryDto filter)
         {
             try
             {
-                var result = await _service.GetAwardCategoryFilter(search);
+                var result = await _service.GetAwardCategoryFilter(filter);
 
                 if (result.IsNullOrEmpty())
                 {
@@ -87,8 +87,7 @@ namespace FAS.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     new { message = "Đã xảy ra lỗi không xác định!", detail = ex.Message });
             }
-        }
-       
+        }      
         [HttpPost]
         public async Task<ActionResult<AwardCategory>> SetAwardCategoryInfo([FromBody] AwardCategoryDto award)
         {
@@ -119,8 +118,8 @@ namespace FAS.API.Controllers
                     new { message = "Đã xảy ra lỗi không xác định!", detail = ex.Message });
             }
         }
-        [HttpPut]
-        public async Task<IActionResult> UpdateAwardCategory([FromBody] AwardCategoryDto dto)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateAwardCategory(Guid id, [FromBody] AwardCategoryDto dto)
         {
             try
             {
@@ -159,35 +158,35 @@ namespace FAS.API.Controllers
             }
 
         }
-        [HttpDelete]
-        public async Task<IActionResult> DeleteAwardCategory([FromQuery] Guid awardCategoryId)
-        {
-            try
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAwardCategory(Guid id)
             {
-                var result = await _service.DeleteAwardCategory(awardCategoryId);
+                try
+                {
+                    var result = await _service.DeleteAwardCategory(id);
 
-                return Ok(result);
+                    return Ok(result);
+                }
+                catch (ArgumentNullException ex)
+                {
+                    return BadRequest(new { message = "Tham số đầu vào không hợp lệ!", detail = ex.Message });
+                }
+                catch (InvalidOperationException ex)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError,
+                        new { message = "Lỗi xử lý dữ liệu nội bộ!", detail = ex.Message });
+                }
+                catch (SqlException ex) // cần thêm using Microsoft.Data.SqlClient;
+                {
+                    return StatusCode(StatusCodes.Status503ServiceUnavailable,
+                        new { message = "Lỗi kết nối cơ sở dữ liệu!", detail = ex.Message });
+                }
+                catch (Exception ex)
+                {
+                    // log ra file / hệ thống logging (Serilog, NLog, ILogger, ...)
+                    return StatusCode(StatusCodes.Status500InternalServerError,
+                        new { message = "Đã xảy ra lỗi không xác định!", detail = ex.Message });
+                }
             }
-            catch (ArgumentNullException ex)
-            {
-                return BadRequest(new { message = "Tham số đầu vào không hợp lệ!", detail = ex.Message });
-            }
-            catch (InvalidOperationException ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    new { message = "Lỗi xử lý dữ liệu nội bộ!", detail = ex.Message });
-            }
-            catch (SqlException ex) // cần thêm using Microsoft.Data.SqlClient;
-            {
-                return StatusCode(StatusCodes.Status503ServiceUnavailable,
-                    new { message = "Lỗi kết nối cơ sở dữ liệu!", detail = ex.Message });
-            }
-            catch (Exception ex)
-            {
-                // log ra file / hệ thống logging (Serilog, NLog, ILogger, ...)
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    new { message = "Đã xảy ra lỗi không xác định!", detail = ex.Message });
-            }
-        }
     }
 }

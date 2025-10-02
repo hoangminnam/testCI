@@ -14,6 +14,7 @@ namespace FAS.BLL.BusinessService
     public class AwardCategoryService : IAwardCategoryService
     {
         private readonly IAwardCategoryRepository _repository;
+
         public AwardCategoryService(IAwardCategoryRepository repository)
         {
             _repository = repository;
@@ -23,9 +24,9 @@ namespace FAS.BLL.BusinessService
         {
             return await _repository.GetAwardCategoryPage();
         }
-        public async Task<List<AwardCategoryDto>> GetAwardCategoryFilter(string search)
+        public async Task<List<AwardCategoryDto>> GetAwardCategoryFilter(AwardCategoryDto filter)
         {
-            return await _repository.GetAwardCategoryFilter(search);
+            return await _repository.GetAwardCategoryFilter(filter);
         }
         public async Task<AwardCategory> SetAwardCategoryInfo(AwardCategoryDto awardCategory)
         {

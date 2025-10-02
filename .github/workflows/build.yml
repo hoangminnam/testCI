@@ -42,6 +42,6 @@ jobs:
       - name: Build and analyze
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"hoangminnam_testCI_95b8cea6-bffd-4acc-9d80-ecc31f6d697c" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://4da171445444.ngrok-free.app"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"hoangminnam_testCI_95b8cea6-bffd-4acc-9d80-ecc31f6d697c" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://b3c38f81cb67.ngrok-free.app"
           dotnet build
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
