@@ -7,11 +7,13 @@ public partial class CommentNominee
 {
     public Guid Id { get; set; }
 
+    public Guid? NomineeId { get; set; }
+
     public Guid? CreatedBy { get; set; }
 
     public string? Comment { get; set; }
 
     public virtual AdminActionLog? CreatedByNavigation { get; set; }
 
-    public virtual Nominee IdNavigation { get; set; } = null!;
+    public virtual Nominee? Nominee { get; set; } = null!;
 }

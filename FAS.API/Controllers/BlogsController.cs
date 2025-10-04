@@ -12,7 +12,8 @@ using FAS.BLL.BusinessInterfaces;
 
 namespace FAS.API.Controllers
 {
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
+    [Route("api/v1/blog/[action]")]
     [ApiController]
     public class BlogsController : ControllerBase
     {
@@ -26,7 +27,7 @@ namespace FAS.API.Controllers
 
         // GET: api/Blogs
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Blog>>> GetBlogs()
+        public async Task<ActionResult<IEnumerable<Blog>>> GetBlogAll()
         {
             var blogs = await _blogService.GetBlogs();
             return Ok(blogs);
@@ -34,7 +35,7 @@ namespace FAS.API.Controllers
 
         // GET: api/Blogs/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Blog>> GetBlog(Guid id)
+        public async Task<ActionResult<Blog>> GetBlogFilter(Guid id)
         {
             var blog = await _blogService.GetBlog(id);
 
@@ -48,7 +49,7 @@ namespace FAS.API.Controllers
 
         // PUT: api/Blogs/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBlog(Guid id, Blog blog)
+        public async Task<IActionResult> UpdateBlog(Guid id,[FromBody] Blog blog)
         {
             if (id != blog.Id)
             {
@@ -62,7 +63,7 @@ namespace FAS.API.Controllers
 
         // POST: api/Blogs
         [HttpPost]
-        public async Task<ActionResult<Blog>> PostBlog(Blog blog)
+        public async Task<ActionResult<Blog>> SetBlogInfo([FromBody] Blog blog)
         {
             await _blogService.AddBlog(blog);
 

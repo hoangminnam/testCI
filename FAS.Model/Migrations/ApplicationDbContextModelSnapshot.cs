@@ -66,6 +66,9 @@ namespace FAS.Model.Migrations
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime");
 
+                    b.Property<int?>("IsActive")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
@@ -124,17 +127,26 @@ namespace FAS.Model.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("id");
 
+                    b.Property<Guid>("AwardId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime");
 
                     b.Property<int?>("IsActive")
                         .HasColumnType("int");
 
+                    b.Property<string>("Name")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime");
 
                     b.HasKey("Id")
                         .HasName("PK__AwardPer__3213E83F270BACB7");
+
+                    b.HasIndex("AwardId");
 
                     b.HasIndex(new[] { "Id" }, "UQ__AwardPer__3213E83E585E425B")
                         .IsUnique();
@@ -189,10 +201,15 @@ namespace FAS.Model.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("NomineeId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id")
                         .HasName("PK__CommentN__3213E83F5FD7C052");
 
                     b.HasIndex("CreatedBy");
+
+                    b.HasIndex("NomineeId");
 
                     b.HasIndex(new[] { "Id" }, "UQ__CommentN__3213E83ECA8964CD")
                         .IsUnique();
@@ -536,13 +553,13 @@ namespace FAS.Model.Migrations
 
             modelBuilder.Entity("FAS.Model.Models.AwardPeriod", b =>
                 {
-                    b.HasOne("FAS.Model.Models.Award", "IdNavigation")
-                        .WithOne("AwardPeriod")
-                        .HasForeignKey("FAS.Model.Models.AwardPeriod", "Id")
+                    b.HasOne("FAS.Model.Models.Award", "Award")
+                        .WithMany("AwardPeriods")
+                        .HasForeignKey("AwardId")
                         .IsRequired()
-                        .HasConstraintName("FK__AwardPeriod__id__5EBF139D");
+                        .HasConstraintName("FK__AwardPeriod__AwardId__5EBF139D");
 
-                    b.Navigation("IdNavigation");
+                    b.Navigation("Award");
                 });
 
             modelBuilder.Entity("FAS.Model.Models.Blog", b =>
@@ -562,15 +579,14 @@ namespace FAS.Model.Migrations
                         .HasForeignKey("CreatedBy")
                         .HasConstraintName("FK__CommentNo__Creat__6C190EBB");
 
-                    b.HasOne("FAS.Model.Models.Nominee", "IdNavigation")
-                        .WithOne("CommentNominee")
-                        .HasForeignKey("FAS.Model.Models.CommentNominee", "Id")
-                        .IsRequired()
-                        .HasConstraintName("FK__CommentNomin__id__6B24EA82");
+                    b.HasOne("FAS.Model.Models.Nominee", "Nominee")
+                        .WithMany("CommentNominees")
+                        .HasForeignKey("NomineeId")
+                        .HasConstraintName("FK__CommentNo__NomineeId__6B24EA82");
 
                     b.Navigation("CreatedByNavigation");
 
-                    b.Navigation("IdNavigation");
+                    b.Navigation("Nominee");
                 });
 
             modelBuilder.Entity("FAS.Model.Models.CouncilMember", b =>
@@ -706,7 +722,7 @@ namespace FAS.Model.Migrations
 
             modelBuilder.Entity("FAS.Model.Models.Award", b =>
                 {
-                    b.Navigation("AwardPeriod");
+                    b.Navigation("AwardPeriods");
                 });
 
             modelBuilder.Entity("FAS.Model.Models.AwardCategory", b =>
@@ -734,7 +750,7 @@ namespace FAS.Model.Migrations
 
             modelBuilder.Entity("FAS.Model.Models.Nominee", b =>
                 {
-                    b.Navigation("CommentNominee");
+                    b.Navigation("CommentNominees");
 
                     b.Navigation("Evaluations");
 

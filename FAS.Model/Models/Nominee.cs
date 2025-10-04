@@ -31,7 +31,7 @@ public partial class Nominee
 
     public virtual AwardCategory? Category { get; set; }
 
-    public virtual CommentNominee? CommentNominee { get; set; }
+    public virtual ICollection<CommentNominee>? CommentNominees { get; set; } = new List<CommentNominee>();
 
     public virtual ICollection<Evaluation> Evaluations { get; set; } = new List<Evaluation>();
 

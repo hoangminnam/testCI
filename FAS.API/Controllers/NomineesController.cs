@@ -11,7 +11,8 @@ using FAS.BLL.BusinessInterfaces;
 
 namespace FAS.API.Controllers
 {
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
+    [Route("api/v1/nominee/[action]")]
     [ApiController]
     public class NomineesController : ControllerBase
     {
@@ -25,7 +26,7 @@ namespace FAS.API.Controllers
 
         // GET: api/Nominees
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Nominee>>> GetNominees()
+        public async Task<ActionResult<IEnumerable<Nominee>>> GetNomineeAll()
         {
             var nominees = await _nomineeService.GetNominees();
             return Ok(nominees);
@@ -33,7 +34,7 @@ namespace FAS.API.Controllers
 
         // GET: api/Nominees/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Nominee>> GetNominee(Guid id)
+        public async Task<ActionResult<Nominee>> GetNomineeFilter(Guid id)
         {
             var nominee = await _nomineeService.GetNominee(id);
 
@@ -47,7 +48,7 @@ namespace FAS.API.Controllers
 
         // PUT: api/Nominees/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutNominee(Guid id, Nominee nominee)
+        public async Task<IActionResult> UpdateNominee(Guid id, [FromBody] Nominee nominee)
         {
             if (id != nominee.Id)
             {
@@ -61,7 +62,7 @@ namespace FAS.API.Controllers
 
         // POST: api/Nominees
         [HttpPost]
-        public async Task<ActionResult<Nominee>> PostNominee(Nominee nominee)
+        public async Task<ActionResult<Nominee>> SetNomineeInfo([FromBody] Nominee nominee)
         {
             await _nomineeService.AddNominee(nominee);
 

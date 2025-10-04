@@ -16,6 +16,14 @@ public partial class ApplicationDbContext : DbContext
     {
     }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlServer("Server=localhost;Database=FAS_Database;Integrated Security=True;TrustServerCertificate=True;");
+        }
+    }
+
     public virtual DbSet<AdminActionLog> AdminActionLogs { get; set; }
 
     public virtual DbSet<Award> Awards { get; set; }
@@ -119,10 +127,13 @@ public partial class ApplicationDbContext : DbContext
             entity.Property(e => e.EndDate).HasColumnType("datetime");
             entity.Property(e => e.StartDate).HasColumnType("datetime");
 
-            entity.HasOne(d => d.IdNavigation).WithOne(p => p.AwardPeriod)
-                .HasForeignKey<AwardPeriod>(d => d.Id)
+            entity.Property(e => e.Name).HasMaxLength(255);
+
+            entity.HasOne(d => d.Award)
+                .WithMany(p => p.AwardPeriods)
+                .HasForeignKey(d => d.AwardId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__AwardPeriod__id__5EBF139D");
+                .HasConstraintName("FK__AwardPeriod__AwardId__5EBF139D");
         });
 
         modelBuilder.Entity<Blog>(entity =>
@@ -158,14 +169,16 @@ public partial class ApplicationDbContext : DbContext
                 .HasColumnName("id");
             entity.Property(e => e.Comment).HasMaxLength(255);
 
-            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.CommentNominees)
+            entity.HasOne(d => d.CreatedByNavigation)
+                .WithMany(p => p.CommentNominees)
                 .HasForeignKey(d => d.CreatedBy)
                 .HasConstraintName("FK__CommentNo__Creat__6C190EBB");
 
-            entity.HasOne(d => d.IdNavigation).WithOne(p => p.CommentNominee)
-                .HasForeignKey<CommentNominee>(d => d.Id)
+            entity.HasOne(d => d.Nominee)
+                .WithMany(p => p.CommentNominees)
+                .HasForeignKey(d => d.NomineeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__CommentNomin__id__6B24EA82");
+                .HasConstraintName("FK__CommentNo__NomineeId__6B24EA82");
         });
 
         modelBuilder.Entity<CouncilMember>(entity =>
@@ -286,11 +299,13 @@ public partial class ApplicationDbContext : DbContext
                 .HasMaxLength(255)
                 .IsUnicode(false);
 
-            entity.HasOne(d => d.Category).WithMany(p => p.Nominees)
+            entity.HasOne(d => d.Category)
+                .WithMany(p => p.Nominees)
                 .HasForeignKey(d => d.CategoryId)
                 .HasConstraintName("FK__Nominee__Categor__656C112C");
 
-            entity.HasOne(d => d.SubmittedBy).WithMany(p => p.Nominees)
+            entity.HasOne(d => d.SubmittedBy)
+                .WithMany(p => p.Nominees)
                 .HasForeignKey(d => d.SubmittedById)
                 .HasConstraintName("FK__Nominee__Submitt__5FB337D6");
         });

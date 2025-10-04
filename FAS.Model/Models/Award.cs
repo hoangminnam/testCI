@@ -17,7 +17,9 @@ public partial class Award
 
     public Guid? CategoryId { get; set; }
 
-    public virtual AwardPeriod? AwardPeriod { get; set; }
+    public int? IsActive { get; set; }
+
+    public virtual ICollection<AwardPeriod>? AwardPeriods { get; set; } = new List<AwardPeriod>();
 
     public virtual AwardCategory? Category { get; set; }
 }
